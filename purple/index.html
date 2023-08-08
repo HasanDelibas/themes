@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeneYaz</title>
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/HasanDelibas/themes@main/purple/script.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HasanDelibas/themes@main/purple/style.css">
+
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      padding: 20px;
+    }
+    .pv{
+      padding-top: 6em;
+      padding-bottom: 4em;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif !important;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
+      user-select: none;
+    }
+
+    .slide{
+      padding-top: var(--navbar-height);
+    }
+
+
+    footer {
+      padding-top: 3em
+    }
+
+    footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    footer>* {
+      opacity: .95;
+    }
+
+    footer p,
+    footer li,
+    footer * {
+      font-size: 16px !important;
+      line-height: 28px !important;
+    }
+
+    footer h6 {
+      opacity: .95;
+      font-weight: 700;
+    }
+
+    footer i {font-size: 24px !important;}
+
+    footer .footer-down {
+      border-top: 1px solid #FFF4;
+      padding: 20px 0;
+    }
+
+
+
+    .navbar {
+      height: var(--navbar-height);
+      overflow: hidden;
+      padding: 0 1em;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 4;
+    }
+
+    .navbar-menus{
+      height: 100%;
+    }
+
+    .navbar-menu {
+      opacity: .95;
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .2s;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .navbar-menu:hover {
+      opacity: 1;
+    }
+
+    .navbar-menu.active{
+      border-bottom: 4px solid #FFF;
+    }
+
+    .navbar .navbar-logo {
+      height: 100%;
+    }
+
+    .button{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.5em 1em;
+      border-radius: 32px;
+      background: var(--color-1-text);
+      color: var(--color-1);
+      transition:0.2s all;
+    }
+    .button:hover{
+      background: var(--color-1);
+      color: var(--color-1-text);
+      box-shadow: inset 0 0 0 1px var(--color-1-text);
+    }
+
+  </style>
+  <!--jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function UpdateHash(){
+      let hash = location.hash || "ana" ;
+      let list = Array.from(document.querySelectorAll(".navbar-menu")).map(e=>e.getAttribute("href")).filter(e=>e!=""&&e!=null).filter(e=>e.startsWith("#")).map(e=>e.substring(1))
+      let elements = list.map(e=>document.querySelector("#"+e)).filter(e=>e!=null)
+      // find nearest element
+      let nearest = elements.reduce((a,b)=>Math.abs(a.getBoundingClientRect().top) < Math.abs(b.getBoundingClientRect().top) ? a : b)
+      let nearestId = nearest.getAttribute("id")
+      // update navbar
+      $(".navbar-menu").removeClass("active");
+      $(".navbar-menu[href='#"+nearestId+"']").addClass("active");
+    }
+    setInterval(()=>{ UpdateHash() }, 100);
+    //$(document).on("click",".navbar-menu",UpdateHash)
+    
+    
+
+  </script>
+</head>
+
+<body class="hide-scrollbar">
+  <nav class="navbar layout-x gap-1em background-primary">
+    <a class="navbar-menu" href="#ana">
+      <!--
+        <img class="navbar-logo" src="deneyaz-white-border-logo.svg" alt="logo" style="width:100px;">
+      -->
+      <img class="navbar-logo" src="DeneYaz-Eflatun.png" alt="logo" style="width:auto;">
+      <b class="size-3" style="font-family: monospace;display:none;">
+        &lt;/DeneYaz&gt;
+      </b>
+    </a>
+    <div class="flex-1"></div>
+    <div class="navbar-menus layout-x hide-on-mobile">
+      <a class="navbar-menu" href="#nedir">Nedir</a>
+      <a class="navbar-menu" href="#nasil">Nasıl</a>
+      <a class="navbar-menu" href="#destekcilerimiz">Destekçilerimiz</a>
+      <a class="navbar-menu" href="#ana">İndir</a>
+    </div>
+    <div class="navbar-menu icon-menu" style="display: none;">
+      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+      </svg>
+    </div>
+  </nav>
+
+  <div class="slide background-primary layout-cx" style="padding-bottom: 2em;" id="ana">
+    <div class="container grid-x-2 gap-1em" style="align-items: center;">
+      <div class="flex-1">
+        <h1 class="text-center size-0">&lt;/DeneYaz&gt;</h1>
+        <p class="text-center size-2">Deneyerek yaz, yazarak öğren.</p>
+        <p class="text-center mute">Deneyaz, genç bireylerin kodlamayı kolayca öğrenmeleri amacıyla geliştirilmiş interaktif <b>Eğitim Odaklı Yazılım Geliştirme</b> uygulamasıdır.</p>
+        <br>
+        <div class="text-center">
+          <a href="//indir.deneyaz.com" class="button">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+            İndir
+          </a>
+        </div>
+      </div>
+      <div class="flex-1" style="position: relative;">
+        <img src="main.png" alt="" style="max-width: 100%">
+        <video src="Deneyaz-Hello World.mp4" autoplay loop muted style="position: absolute;left: 12%;width: 76%;top: 7%;"></video>
+      </div>
+    </div>
+  </div>
+<!--
+  <div class="layout-cx" style="padding: 0!important;display: none;">
+    <div class="grid-x-2 gap-1em" style="align-items: center;">
+      <div class="flex-1">
+        <video src="Deneyaz-Hello World.mp4" autoplay loop muted controls style="width:100%;"></video>
+      </div>
+      <div class="flex-1">
+        <h1 class="text-center size-0">Dene Yaz</h1>
+        <p class="text-center size-2">Deneyerek öğren, öğrenerek yaz.</p>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <div class="container layout-cy pv" id="nedir">
+    <h2 class="text-center size-1 m0">Dene Yaz Öğren</h2>
+    <p class="text-center mute">Deneyerek öğren, öğrenerek yaz.</p>
+    <br>
+    <video src="Deneyaz-Hello World.mp4" autoplay loop muted controls style="width:100%; max-width:600px;box-shadow:2px 4px 6px #000A;border-radius:.25em;"></video>
+  </div>
+  
+  <div class="container layout-cy pv">
+    <h2 class="text-center size-1 m0">Geliştirme Ortamı</h2>
+    <p class="text-center mute">Oyunlaştırma teknikleri ile eğlenerek öğren.</p>
+    <br>
+    <video src="Deneyaz-Terminal.mp4" autoplay loop muted controls style="width:100%; max-width:600px;box-shadow:2px 4px 6px #000A;border-radius:.25em;"></video>
+  </div>
+
+  <div class="layout-cx pv" id="nasil">
+    <div class="container">
+      <div class="text-center size-1 layout-cx" style="font-family: monospace;">
+        <div class="animation--text-typing">
+          <div>&gt; Dene</div>
+          <div>&gt; Yaz</div>
+          <div>&gt; Öğren</div>
+        </div>
+      </div>
+      <div class="grid-x-3 gap-1em">
+        <div class="layout-cy">
+          <img style="width:128px;aspect-ratio: 1;" src="restart.png">
+          <h2 class="size-3 text-center">Dene</h2>
+          <p class="mute text-center">Bu bir şeylerin başlangıcı</p>
+        </div>
+        <div class="layout-cy">
+          <img style="width:128px;aspect-ratio: 1;" src="code.png">
+          <h2 class="size-3 text-center">Yaz</h2>
+          <p class="mute text-center">Senin kodlarına ihtiyacımız var</p>
+        </div>
+        <div class="layout-cy">
+          <img style="width:128px;aspect-ratio: 1;" src="learn.png">
+          <h2 class="size-3 text-center">Öğren</h2>
+          <p class="mute text-center">İçerisinde yüzlerce farklı bölüm seni bekliyor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  
+  <div class="layout-cx pv" id="destekcilerimiz">
+    <div class="container">
+      <h2 class="size-1 text-center">Destekçilerimiz</h2>
+      <p class="size-4 mute text-center">İyi ki varsınız ❤️</p>
+      <br>
+      <br>
+      <div class="layout-cx" style="gap:2em">
+        <a href="https://www.sanayi.gov.tr/">
+          <img style="width:80px;height:80px;object-fit:contain;" src="STB-Logo Arma TR.png" alt="">
+        </a>
+        <a href="https://t3vakfi.org/tr/">
+          <img style="width:80px;height:80px;object-fit:contain;" src="t3-logo.png" alt="">
+        </a>
+        <a href="https://teknofest.org/tr/">
+          <img style="width:80px;height:80px;object-fit:contain;" src="teknofest-logo.png" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="background-primary">
+    <div class="container text-center">
+      <div class="grid-x-3 gap-1em">
+        <div>
+          <h6>Hakkımızda</h6>
+          <p>DeneYaz: genç bireylerin kodlamayı kolayca öğrenmeleri amacıyla geliştirilmiş interaktif E-IDE
+            uygulamasıdır.</p>
+        </div>
+        <div>
+          <h6>Bağlantılar</h6>
+          <ul>
+            <li> <a style="text-decoration: underline;" href="https://www.sanayi.gov.tr/">Sanayi Ve Teknoloji Bakanlığı</a> </li>
+            <li> <a style="text-decoration: underline;" href="https://t3vakfi.org/tr/">T3 Vakfı</a> </li>
+            <li> <a style="text-decoration: underline;" href="https://teknofest.org/tr/">Teknofest</a> </li>
+            <li> <a style="text-decoration: underline;" href="https://www.deneyap.org/">Deneyap</a> </li>
+          </ul>
+        </div>
+        <div>
+          <h6>İletişim</h6>
+          <a href="#your-link">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="#your-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#your-link">
+            <i class="fab fa-pinterest"></i>
+          </a>
+          <a href="#your-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <p class="p-small">
+            <a href="mailto:info@deneyaz.com"><strong>info[at]deneyaz.com</strong></a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-down padding-1 text-center layout-cx gap-1em">
+      <img src="milli-teknoloji-hamlesi.png" alt="" style="width: 48px;">
+      <div>Deneyaz.com</div>
+    </div>
+  </footer>
+</body>
+
+</html>
